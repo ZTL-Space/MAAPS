@@ -1,0 +1,13 @@
+
+            pid=
+            cert = /etc/stunnel/stunnel.pem
+            sslVersion = SSLv3
+            debug=2
+            syslog=no
+            [https]
+            accept=443
+            connect=8001
+            TIMEOUTclose=1
+            sslVersion = all
+            options = NO_SSLv2
+        

@@ -2,3 +2,4 @@ django
 django-crispy-forms
 django-resized
 unidecode
+Pillow

@@ -1,4 +1,4 @@
-import os
+#import os
 import tempfile
 import pexpect
 import time
@@ -26,8 +26,8 @@ class System:
 
     def _git_download(self):
         self._ssh('git clone https://github.com/makerhafen/MAAPS.git ; cd MAAPS ; git pull')
-        self._ssh('cd MAAPS/client ; sudo pip3 install -r requirements.txt')
-        self._ssh('cd MAAPS/server ; sudo pip3 install -r requirements.txt')
+        self._ssh('cd MAAPS/client ; sudo -H pip3 install -r requirements.txt')
+        self._ssh('cd MAAPS/server ; sudo -H pip3 install -r requirements.txt')
 
     def _ssh(self, cmd, timeout=120):
         ssh_cmd = 'ssh %s@%s %s "%s"' % (self.username, self.ip, SSH_OPTIONS, cmd)
@@ -144,7 +144,7 @@ class Server(System):
     def _install_stunnel(self):
         self._ssh('sudo apt-get -y update')
         self._ssh('sudo apt-get -y install stunnel')
-        open("/tmp/stunnel_conf", "w").write('''
+        open("./stunnel_conf", "w").write('''
             pid=
             cert = /etc/stunnel/stunnel.pem
             sslVersion = SSLv3
@@ -157,7 +157,7 @@ class Server(System):
             sslVersion = all
             options = NO_SSLv2
         ''')
-        self._ssh_exec('scp %s /tmp/stunnel_conf %s@%s:/tmp/stunnel.conf' % (SSH_OPTIONS, self.username, self.ip), 120)
+        self._ssh_exec('scp %s ./stunnel_conf %s@%s:/tmp/stunnel.conf' % (SSH_OPTIONS, self.username, self.ip), 120)
         self._ssh('''
             cd /etc/stunnel/;
             sudo rm stunnel.key stunnel.cert stunnel.pem ;
