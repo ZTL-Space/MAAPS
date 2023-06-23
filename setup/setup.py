@@ -25,7 +25,7 @@ class System:
         self.token = token
 
     def _git_download(self):
-        self._ssh('git clone https://github.com/makerhafen/MAAPS.git ; cd MAAPS ; git pull')
+        self._ssh('git clone git@github.com:ZTL-Space/MAAPS.git ; cd MAAPS ; git pull')
         self._ssh('cd MAAPS/client ; sudo -H pip3 install -r requirements.txt')
         self._ssh('cd MAAPS/server ; sudo -H pip3 install -r requirements.txt')
 

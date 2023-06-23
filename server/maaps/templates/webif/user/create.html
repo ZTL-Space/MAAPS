@@ -5,7 +5,7 @@
     <!-- Breadcrumb -->
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/webif">Makerhafen</a></li>
+            <li class="breadcrumb-item"><a href="/webif">ZTL</a></li>
             <li class="breadcrumb-item"><a href="/webif/user/list">Benutzer</a></li>
             <li class="breadcrumb-item"><a href="/webif/user/create">Erstellen</a></li>
         </ol>
@@ -23,7 +23,7 @@
             <h5>Neuen Benutzer anlegen</h5>
             <form method="post">
                 {% csrf_token %}
-                {{form|crispy}}
+                {% load crispy_forms_tags %}®
                 <h4>Maschinen Zugriff</h4>
                 {% for machine in machines %}
                     <input type="checkbox" name="allowed_machines" value="{{ machine.id }}"  {% if profile.user in machine.allowed_users.all %}checked{% endif %}> {{ machine }}<br>
