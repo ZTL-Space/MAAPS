@@ -57,10 +57,21 @@ class ER302_RFID_Reader(object):
         else:
             return
 
-    def xor_strings(self, xs, ys):
-        return "".join(chr(ord(x) ^ ord(y)) for x, y in zip(xs, ys))
+    def xor_strings(self, a, b):
+        # print('A:')
+        # print(a)
+        # print('B:')
+        # print(b)
+        if len(a) != 1 or len(b) != 1:
+            raise ValueError("Die Längen der Bytes-Sequenzen müssen übereinstimmen.")
+        
+        result = bytes([a[0] ^ b[0]])
+        # print('RES:')
+        # print(result)
+        return bytes(result)
 
     def read_response(self):
+        print('RESPONSE:')
         all_output = []
         output = b''
         i = 0
@@ -91,16 +102,18 @@ class ER302_RFID_Reader(object):
         buf.insert(6, cmd_code[0])  # Command code
         buf.insert(7, cmd_code[1])
         k = 0
+        print(buf)
         for i in range(8, 8 + len(param)):
             buf.insert(i, param[k])
             k += 1
         for i in range(3, len(buf)):
             ver = self.xor_strings(ver, buf[i])
+        print(buf)
         buf.insert(len(buf), ver)
-        # print(buf)
-        #byte_array = bytearray(b''.join(buf))
-        byte_array = buf
-        self.debug(byte_array)
+        print(buf)
+        byte_array = bytearray(b''.join(buf))
+        #byte_array = bytearray(buf)
+        #self.debug(byte_array)
         self.ser.write(byte_array)
         self.ser.flushInput()
 
@@ -160,6 +173,7 @@ class ER302_RFID_Reader(object):
         return result
 
     def rf_anticoll(self):
+        print('ANTICOLL:')
         self.send_request([b'\x00', b'\x00'], [b'\x02', b'\x02'], [])
         result = self.read_response()
         self.debug(result)
@@ -172,6 +186,7 @@ class ER302_RFID_Reader(object):
         return result
 
     def rf_M1_authentication2(self, block, key):
+        print('AUTH:')
         param = [b'\x60', block, key]
         self.send_request([b'\x00', b'\x00'], [b'\x07', b'\x02'], param)
         result = self.read_response()
@@ -245,11 +260,11 @@ class ER302_RFID_Reader(object):
                 # print(card_id)
                 if self.rf_select(card_id):
                     if self.rf_M1_authentication2(block, self.key) != False:
-                        self.rf_beep(1)
+                        # self.rf_beep(1)
                         self.rf_light(self.LED_BLUE)
                         return self.rf_read(block)
                     else:
-                        self.rf_beep(20)
+                        # self.rf_beep(20)
                         self.rf_light(self.LED_RED)
                         return 'Authentication failed'
         else:
