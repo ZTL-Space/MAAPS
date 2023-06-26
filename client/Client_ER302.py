@@ -4,14 +4,9 @@ import os
 from bottle import route
 import bottle
 from bottle import response
+import rfid_er302
 
 
-RFID_SPI_BUS = 1  # SPI BUS for RFID
-RFID_SPI_DEVICE = 0  # SPI device for RFID
-
-RELAY_1_GPIO = 26  # Raspi GPIO for Relay 1
-RELAY_2_GPIO = 13  # Raspi GPIO for Relay 2
-RELAY_3_GPIO = 6  # Raspi GPIO for Relay 3
 
 ##
 ## RELAY
