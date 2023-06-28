@@ -10,7 +10,7 @@ reader.set_key(b'\xFF\xFF\xFF\xFF\xFF\xFF')
 #sound=reader.rf_beep(20)
 # for i in range(0,5,1):
 #     print("DATA BLOCK:"+str(i))
-card_data = reader.rf_read(b'\x04')
+card_data = reader.read_block(b'\x04')
 print(card_data)
 
 
