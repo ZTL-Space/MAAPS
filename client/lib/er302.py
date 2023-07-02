@@ -104,7 +104,13 @@ class ER302:
     #     checksum = reduce(lambda x, y: x ^ y, body_int)
 
     #     return HEADER + struct.pack('<H', length) + body + struct.pack('B', checksum)
-    def build_command(self, cmd, data):
+    def calculate_xor_checksum(self, byte_array):
+        checksum = 0
+        for byte in byte_array:
+            checksum ^= byte
+        return checksum
+    
+    def build_command(self, cmd, data,checksum_req = True):
         """Build a serial command.
 
         Keyword arguments:
@@ -118,14 +124,20 @@ class ER302:
         # print("RAW: ",body_raw)
         body = b''
         for b in body_raw:
-             body += (b).to_bytes()
+             body += struct.pack('B',b)
+             print(struct.pack('B',b))
              if b == 0xAA:
                  body += b'\x00'
-        # print("BODY: ",body)
+        print("body: ",body)
         body_int = list(body)
-        checksum = reduce(lambda x, y: x ^ y, body_int)
-
-        return HEADER + struct.pack('<H', length) + body + struct.pack('B', checksum)
+        checksum = self.calculate_xor_checksum(body)
+        if checksum_req:
+            send_buffer = HEADER + struct.pack('<H', length) + body + struct.pack('B', checksum)
+        else:
+            send_buffer = HEADER + struct.pack('<H', length) + body 
+            
+        print("SEND: ",send_buffer)
+        return send_buffer
 
     def get_n_bytes(self, n, handle_AA=False):
         """Read n bytes from the device.
