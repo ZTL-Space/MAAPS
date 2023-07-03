@@ -22,6 +22,7 @@ class RFID:
         # self.reader.authentication(0x01, 0x61, 0x01)
     def read(self):
         self.reader = nfc.Reader()
+        self.reader.info()
         self.reader.authentication(0x01, 0x61, 0x01)
         token_id, text = None, None
         for i in range(3):
@@ -35,6 +36,7 @@ class RFID:
 
     def write(self, text):
         self.reader = nfc.Reader()
+        self.reader.info()
         self.reader.authentication(0x01, 0x61, 0x01)
         token_id, output = None, None
         for i in range(3):

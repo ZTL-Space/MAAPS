@@ -20,7 +20,7 @@ class Reader:
         """create an ACR122U object
         doc available here: http://downloads.acs.com.hk/drivers/en/API-ACR122U-2.02.pdf"""
         self.reader_name, self.connection = self.instantiate_reader()
-        
+        self.load_authentication_data(0x01,DEFAULT_KEYS[1])
 
     @staticmethod
     def instantiate_reader():
