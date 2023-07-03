@@ -25,9 +25,10 @@ class System:
         self.token = token
 
     def _git_download(self):
-        self._ssh('git clone git@github.com:ZTL-Space/MAAPS.git ; cd MAAPS ; git pull')
-        self._ssh('cd MAAPS/client ; sudo -H pip3 install -r requirements.txt')
-        self._ssh('cd MAAPS/server ; sudo -H pip3 install -r requirements.txt')
+        self._ssh('rm -rf  ~/MAAPS;')
+        self._ssh('git clone https://github.com/ZTL-Space/MAAPS.git ; cd MAAPS ; git pull',timeout=300)
+        self._ssh('cd MAAPS/client ; sudo -H pip3 install -r requirements.txt',timeout=300)
+        self._ssh('cd MAAPS/server ; sudo -H pip3 install -r requirements.txt',timeout=300)
 
     def _ssh(self, cmd, timeout=120):
         ssh_cmd = 'ssh %s@%s %s "%s"' % (self.username, self.ip, SSH_OPTIONS, cmd)
@@ -56,9 +57,11 @@ class System:
 
 class Raspberry(System):
     def install(self, server):
+        print("INSTALL PI:",self.ip)
         self._update_raspberry()
+        self._git_download()
         self._install_lcd()
-        time.sleep(30)  # wait for pi to reboot
+        time.sleep(120)  # wait for pi to reboot
         self._install_spi()
         self._install_hardwarepy()
         self._install_autostart_chromium(server)
@@ -69,10 +72,11 @@ class Raspberry(System):
         self._ssh('sudo apt-get -y update', timeout=600)
         self._ssh('sudo apt-get -y upgrade', timeout=600)
         self._ssh('sudo apt-get -y remove --purge lxplug-ptbatt pulseaudio cups-browsed piwiz ', timeout=600)
-        self._ssh('sudo apt-get -y remove --purge wolfram-engine triggerhappy anacron logrotate dphys-swapfile', timeout=600)
+        self._ssh('sudo apt-get -y remove --purge wolfram-engine triggerhappy anacron python2 logrotate dphys-swapfile firefox-esr', timeout=600)
         self._ssh('sudo systemctl disable bootlogs', timeout=600)
         self._ssh('sudo systemctl disable console-setup', timeout=600)
-        self._ssh('sudo apt-get -y install busybox-syslogd', timeout=600)
+        self._ssh('sudo apt-get -y install busybox-syslogd git python3-pip chromium-browser', timeout=600)
+        self._ssh('sudo apt autoremove -y', timeout=600)
         self._ssh('sudo dpkg --purge rsyslog', timeout=600)
 
         self._ssh('''
