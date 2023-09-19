@@ -1,4 +1,4 @@
 type   , ip            , mac_address       , username , password  , lcd_rotation , token
-server , 10.123.1.66, 00:19:17:a9:10:00 , ztl      , ztl , 0        ,
-pos , 10.123.1.66, 00:19:17:a9:10:00 , ztl      , ztl , 0        ,
+server ,  10.42.1.80, 00:19:17:a9:10:00 , ztl      , ztl , 0        ,
+pos ,  10.42.1.80, 00:19:17:a9:10:00 , ztl      , ztl , 0        ,
 machine    , 10.123.1.66, d8:3a:dd:29:5b:38 , ztl      , ztl , 180        ,
