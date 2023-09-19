@@ -9,9 +9,10 @@ from bottle import response
 RFID_SPI_BUS = 1  # SPI BUS for RFID
 RFID_SPI_DEVICE = 0  # SPI device for RFID
 
-RELAY_1_GPIO = 26  # Raspi GPIO for Relay 1
-RELAY_2_GPIO = 13  # Raspi GPIO for Relay 2
-RELAY_3_GPIO = 6  # Raspi GPIO for Relay 3
+RELAY_1_GPIO = 25  # Raspi GPIO for Relay 1
+RELAY_2_GPIO = 24  # Raspi GPIO for Relay 2
+RELAY_3_GPIO = 23  # Raspi GPIO for Relay 3
+RELAY_4_GPIO = 22  # Raspi GPIO for Relay 3
 
 ##
 ## RELAY
