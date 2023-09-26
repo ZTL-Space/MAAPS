@@ -35,7 +35,7 @@ def write_txt(r, position, data):
         # print("Number: ",length)
         # print("Data: ",data_part)
         if start >= position+3:
-            raise error.InstructionFailed(f"OUT OF BLOCK ")
+            raise error.InstructionFailed("OUT OF BLOCK ")
         r.update_binary_blocks(start,length,data_part)
 
 def write(r, position, number, data):
@@ -88,11 +88,11 @@ def read_16(r, position, number):
 
 
 text = "U:Exel;4097b441dd060ae7ce72"
-print( write_txt(reader,0x01,text))
+#print( write_txt(reader,0x01,text))
 #write(reader, 0x02, 0x20, [0x00 for i in range(0,16)])
 read_data = reader.read_no_block()
-reader.print_data(read_data)
+#reader.print_data(read_data)
 print(bytes(read_data[1]).decode('ascii'))
 print(read_data)
-test_keys(reader,0x00)    
+#test_keys(reader,0x00)    
 # print("READ: ", read(reader, 0x01, 0x20))
