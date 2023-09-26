@@ -8,9 +8,6 @@ from lib.acr122u import nfc
 import math
 import struct
 
-from lib.acr122u import utils, option, error, nfc
-
-
 
 ##
 ## RFID
@@ -19,6 +16,7 @@ class RFID:
     def __init__(self):
         self.reader = None
         # self.reader.info()
+        self.reader.set_key(b'\xFF\xFF\xFF\xFF\xFF\xFF')
         # self.reader.authentication(0x01, 0x61, 0x01)
     def read(self):
         self.reader = nfc.Reader()
