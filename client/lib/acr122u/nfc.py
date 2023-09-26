@@ -254,10 +254,10 @@ class Reader:
         self.command("buzzer_sound", [poll_buzzer_status])
 
     def read_no_block(self):
-        position = 0x08
+        position = 0x01
         number= 32
         # uuid = [f"{byte:02X}" for byte in self.get_uid()]
-        uuid = int.from_bytes(self.get_uid(), byteorder='big')
+        #uuid = int.from_bytes(self.get_uid(), byteorder='big')
         result = []
         while number >= 16:
             result.extend(self.read_binary_blocks( position, 16))
@@ -267,9 +267,9 @@ class Reader:
             encoded = bytes(result).decode('utf-8').replace('\x00','')
         except:
             encoded = result
-        return uuid, encoded
+        return  encoded
     
-    def write_no_block(self, data, startblock = 0x08,):
+    def write_no_block(self, data, startblock = 0x01):
         self.authentication(0x00, 0x61, 0x01)
         data = bytes(data, 'utf-8')
         # uuid = [f"{byte:02X}" for byte in self.get_uid()]
