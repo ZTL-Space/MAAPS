@@ -16,12 +16,11 @@ class RFID:
     def __init__(self):
         self.reader = None
         # self.reader.info()
-        self.reader.set_key(b'\xFF\xFF\xFF\xFF\xFF\xFF')
         # self.reader.authentication(0x01, 0x61, 0x01)
     def read(self):
         self.reader = nfc.Reader()
         self.reader.info()
-        self.reader.authentication(0x01, 0x61, 0x01)
+        self.reader.authentication(0x01, 0x60, 0x00)
         token_id, text = None, None
         for i in range(3):
             token_id, text = self.reader.read_no_block()
