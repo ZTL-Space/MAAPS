@@ -9,10 +9,10 @@ from bottle import response
 RFID_SPI_BUS = 1  # SPI BUS for RFID
 RFID_SPI_DEVICE = 0  # SPI device for RFID
 
-RELAY_1_GPIO = 25  # Raspi GPIO for Relay 1
-RELAY_2_GPIO = 24  # Raspi GPIO for Relay 2
-RELAY_3_GPIO = 23  # Raspi GPIO for Relay 3
-RELAY_4_GPIO = 22  # Raspi GPIO for Relay 3
+RELAY_1_GPIO = 26  # Raspi GPIO for Relay 1
+RELAY_2_GPIO = 19  # Raspi GPIO for Relay 2
+#RELAY_3_GPIO = 23  # Raspi GPIO for Relay 3
+#RELAY_4_GPIO = 22  # Raspi GPIO for Relay 3
 
 ##
 ## RELAY
@@ -62,7 +62,7 @@ class RelayBoard:
     def __init__(self):
         self.relay_1 = self._Relay("Relay 1", RELAY_1_GPIO, self)
         self.relay_2 = self._Relay("Relay 2", RELAY_2_GPIO, self)
-        self.relay_3 = self._Relay("Relay 3", RELAY_3_GPIO, self)
+        # self.relay_3 = self._Relay("Relay 3", RELAY_3_GPIO, self)
 
     def check_screenblank(self):
         if self.relay_1.is_active is True or self.relay_2.is_active is True or self.relay_3.is_active is True:

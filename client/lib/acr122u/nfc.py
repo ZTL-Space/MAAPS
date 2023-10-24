@@ -269,7 +269,7 @@ class Reader:
             encoded = result
         return  uuid, encoded
     
-    def write_no_block(self, data, startblock = 0x01):
+    def write_no_block(self, data, startblock = 0x08):
         self.authentication(0x00, 0x61, 0x01)
         data = bytes(data, 'utf-8')
         # uuid = [f"{byte:02X}" for byte in self.get_uid()]
