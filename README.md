@@ -31,9 +31,11 @@ Add devices to setup/devices.csv, edit setup/wpa_supplicant.conf to match your w
 
 #### Server
 ```
-python3 setup.py serversetup
+pip install -r server/requirements.txt
+python3 server/manage.py migrate
 ```
-On first install login to server now, go to /home/{PI_USERNAME}/MAAPS/server and run
+
+On first install login to server now, go to /MAAPS/server and run
 ```
 python3 manage.py createsuperuser 
 ```
@@ -41,6 +43,12 @@ python3 manage.py createsuperuser
 to add your first user. 
 Open the user admin page https://SERVERIP/webif/user/list, add firstname and lastname to admin user and save.
 Open the django admin page at https://SERVERIP/admin/, open the "Tokens" page and get the token identifier for admin (for example U:admin;4c31a8d19b95a7dfe85c)
+
+start server
+```
+python3 manage.py runserver 0.0.0.0:8001 
+```
+
 
 #### Point of Sale
 Install your first point of sale
@@ -54,3 +62,11 @@ Use the token you got from the token admin page
 python3 hardware.py write "YOUR_ADMIN_TOKEN_HERE" 
 ```
 After your first card was created, you can login on the POS with this card and create additional cards.
+
+
+add prices
+``````
+spaceRentPayment.daily
+spaceRentPayment.monthly
+```
+
