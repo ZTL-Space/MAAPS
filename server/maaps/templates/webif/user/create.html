@@ -23,7 +23,7 @@
             <h5>Neuen Benutzer anlegen</h5>
             <form method="post">
                 {% csrf_token %}
-                {% load crispy_forms_tags %}®
+                {{form|crispy}}
                 <h4>Maschinen Zugriff</h4>
                 {% for machine in machines %}
                     <input type="checkbox" name="allowed_machines" value="{{ machine.id }}"  {% if profile.user in machine.allowed_users.all %}checked{% endif %}> {{ machine }}<br>

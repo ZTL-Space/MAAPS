@@ -8,3 +8,9 @@ __pycache__/
 backups
 db.sqlite3
 server/server.log
+bin
+include
+pyvenv.cfg
+lib64
+lib
+setup/devices.csv
