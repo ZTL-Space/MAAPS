@@ -2,6 +2,9 @@
 
 MAAPS - Machine Access And Payments System
 
+MAAPS is a system for managing payments and access to machines designed to be used in Makerspaces.
+it uses RFID cards for authentification. 
+
 ### Hardware
 
 - Raspberry PI
@@ -65,8 +68,7 @@ After your first card was created, you can login on the POS with this card and c
 
 
 add prices
-``````
+```
 spaceRentPayment.daily
 spaceRentPayment.monthly
 ```
-
