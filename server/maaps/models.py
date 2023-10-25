@@ -22,6 +22,10 @@ def rename_file(instance, filename):
     ext = filename.split('.')[-1]
     filename = '{}_{}.{}'.format(instance.user.username, now().strftime('%Y.%m.%d_%H.%M.%S'), ext)
     return os.path.join('photos/', filename)
+def machine_pic(machine, filename):
+    ext = filename.split('.')[-1]
+    filename = '{}_{}.{}'.format(machine.name,machine.id, ext)
+    return os.path.join('machines/', filename)
 
 
 
@@ -138,6 +142,7 @@ class Machine(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     name = models.CharField(max_length=200)
+    picture = ResizedImageField(blank=True, null=True, upload_to=machine_pic)
     group_name = models.CharField(max_length=100, blank=True)
     comment = models.CharField(max_length=10000, blank=True)
     ask_clean = models.BooleanField(default=False)
@@ -145,7 +150,7 @@ class Machine(models.Model):
     show_autologout = models.BooleanField(default=False)
     price_per_hour = models.ForeignKey(Price, on_delete=models.SET_NULL, related_name="machinePerHour", blank=True, null=True)  # in Euro
     price_per_usage = models.ForeignKey(Price, on_delete=models.SET_NULL, related_name="machinePerUsage", blank=True, null=True)  # in Euro
-    tutor_required_count = models.IntegerField(default=0)  # wir oft
+    tutor_required_count = models.IntegerField(default=0)  # wie oft
     tutor_required_once_after_month = models.IntegerField(default=24)  # all
     current_session = models.OneToOneField("MachineSession", on_delete=models.SET_NULL, related_name="current_session", blank=True, null=True)
     allowed_users = models.ManyToManyField(User, related_name="allowed_machines")

@@ -37,7 +37,9 @@ urlpatterns = [
     path(r'machine/other_user_pays'             , views.machine__other_user_pays  , name='machine__payment_other_user_pays'),
     path(r'machine/other_user_pays/<user_token>', views.machine__other_user_pays  , name='machine__payment_other_user_pays_with_parameter'),
     path(r'machine/auto_logout'                 , views.machine__auto_logout      , name='machine__auto_logout'),
+    path(r'machine/auto_logout'                 , views.machine__auto_logout      , name='machine__auto_logout'),
     path(r'machine/M:<machine_token>'           , views.machine__login_machine    , name='machine__login_with_parameter'),
+    path(r'machine/G:<group_name>'              , views.machine__group_select    , name='machine__group_selec_with_parameter'),
 
     # Webinterface
     path('webif/'                               , views.webif__dashboard   , name='webif__dashboard'),
