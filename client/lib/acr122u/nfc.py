@@ -21,6 +21,7 @@ class Reader:
         doc available here: http://downloads.acs.com.hk/drivers/en/API-ACR122U-2.02.pdf"""
         self.reader_name, self.connection = self.instantiate_reader()
         self.load_authentication_data(0x01,DEFAULT_KEYS[1])
+        self.load_authentication_data(0x00,DEFAULT_KEYS[1])
 
     @staticmethod
     def instantiate_reader():
@@ -253,8 +254,9 @@ class Reader:
             0x00"""
         self.command("buzzer_sound", [poll_buzzer_status])
 
-    def read_no_block(self):
-        position = 0x01
+    def read_no_block(self,startblock = 0x08):
+        self.authentication(startblock, 0x60, 0x00)
+        position = startblock
         number= 32
         # uuid = [f"{byte:02X}" for byte in self.get_uid()]
         uuid = int.from_bytes(self.get_uid(), byteorder='big')
@@ -270,7 +272,7 @@ class Reader:
         return  uuid, encoded
     
     def write_no_block(self, data, startblock = 0x08):
-        self.authentication(0x00, 0x61, 0x01)
+        self.authentication(startblock, 0x60, 0x00)
         data = bytes(data, 'utf-8')
         # uuid = [f"{byte:02X}" for byte in self.get_uid()]
         uuid = int.from_bytes(self.get_uid(), byteorder='big')

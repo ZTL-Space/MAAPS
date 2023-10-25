@@ -15,8 +15,8 @@ DEFAULT_KEYS = [
     [0xd3, 0xf7, 0xd3, 0xf7, 0xd3, 0xf7],
     [0xaa, 0xbb, 0xdd, 0xcc, 0xee, 0xff],
 ]
-reader.load_authentication_data(0x01, DEFAULT_KEYS[1])
-reader.authentication(0x00, 0x61, 0x01)
+reader.load_authentication_data(0x00, DEFAULT_KEYS[1])
+reader.authentication(0x08, 0x60, 0x00)
 # reader.get_uid()
 # reader.info()
 # reader.get_picc_version()
@@ -90,9 +90,9 @@ def read_16(r, position, number):
 text = "U:Exel;4097b441dd060ae7ce72"
 #print( write_txt(reader,0x01,text))
 #write(reader, 0x02, 0x20, [0x00 for i in range(0,16)])
-read_data = reader.read_no_block()
-#reader.print_data(read_data)
-print(bytes(read_data[1]).decode('ascii'))
-print(read_data)
+read_data = read(reader, 0x08, 0x20)
+reader.print_data(read_data)
+# print(bytes(read_data[1]).decode('ascii'))
+# print(read_data())
 #test_keys(reader,0x00)    
 # print("READ: ", read(reader, 0x01, 0x20))
