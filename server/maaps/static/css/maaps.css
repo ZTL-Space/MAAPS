@@ -46,7 +46,7 @@
   }
 }
 
-    body{
+    /* body{
         margin-top:20px;
         color: #1a202c;
         text-align: left;
@@ -101,4 +101,13 @@
     }
     .text-secondary {
         text-align:center;
-    }
+    } */
+.machineselect img {
+  max-width: 100%;
+}
+
+
+.machineselect label {
+  display: block;
+  text-align: center;
+}

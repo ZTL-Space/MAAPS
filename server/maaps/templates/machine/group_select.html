@@ -1,0 +1,39 @@
+{% extends "machine/base.html" %}
+
+{% block content %}
+    <div class="row header">
+        <div class="col-xs-9">
+            <b class="header_title">{{ group }}</b>
+        </div>
+        <a id="abort" href="{{url}}">
+            <div class="col-xs-3 header_link">
+                Abbrechen
+            </div>
+        </a>
+    </div>
+{% if error != None %}
+    <h2>{{error}}</h2>
+{% else %}
+
+        <div class ="container">
+                <h3>Welchen {{ group }} möchtest du freischalten?</h3>
+                <div class="row machineselect">
+                {% for machine in machines %}
+                <div class="col-md-2">
+                    <a href="./{{ machine.url }}">
+                        
+                    
+                        <img src="../media/{{machine.picture|default:"machines/not_found.png"}}"></img>
+                        <label>{{machine.name}}</label>
+                    </a>
+                    </div>
+                {% endfor %}
+            
+        </div>
+
+    
+
+{% endif %}
+   
+
+{% endblock %}

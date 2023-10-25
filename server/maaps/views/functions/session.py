@@ -34,6 +34,22 @@ def get_machine_from_session(request):
         except:
             pass
     return machine
+def get_machines_from_group_session(request):
+    group = request.session.get("group", None)
+    machines = 'None found'
+    if group is not None:
+        try:
+            machines = models.Machine.objects.filter(group_name=group)
+            for machine in machines:
+                machine.url = getattr(models.Token.objects.get(machine=machine),'identifier')
+                
+                
+                
+                
+
+        except:
+            pass
+    return machines
 
 
 def get_profile_from_session(request):
