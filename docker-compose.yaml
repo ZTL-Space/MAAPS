@@ -11,7 +11,7 @@ services:
     image: ghcr.io/ztl-space/maaps:main
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/code
+      - ./data/media:/server/media
     ports:
       - "8000:8000"
     environment:
