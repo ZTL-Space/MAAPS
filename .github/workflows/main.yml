@@ -1,0 +1,2 @@
+- name: GitHub Container Registry Docker Action
+  uses: trentjones21/github-docker@v3.0.2
