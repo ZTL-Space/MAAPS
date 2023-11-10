@@ -16,3 +16,14 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      
+    - name: Publish Image
+      uses: matootie/github-docker@v3.0.0
+      id: publish
+      with:
+        accessToken: ${{ github.token }}
+        tag: ${{ github.sha }}
+
+    - name: Print Full Image URL
+      run: echo ${{ stets.publish.outputs.imageURL }}:${{ github.sha }}
+

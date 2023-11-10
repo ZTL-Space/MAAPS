@@ -1,9 +1,0 @@
-- name: Publish Image
-  uses: matootie/github-docker@v3.0.0
-  id: publish
-  with:
-    accessToken: ${{ github.token }}
-    tag: ${{ github.sha }}
-
-- name: Print Full Image URL
-  run: echo ${{ stets.publish.outputs.imageURL }}:${{ github.sha }}
