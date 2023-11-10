@@ -1,5 +1,7 @@
-django
+Django
 django-crispy-forms
 django-resized
 unidecode
 Pillow
+crispy-bootstrap4
+psycopg2>=2.8
