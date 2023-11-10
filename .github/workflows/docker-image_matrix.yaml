@@ -19,7 +19,7 @@ permissions:
 env:
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ztl-space/maaps
 
 jobs:
   build-container_matrix:
