@@ -8,3 +8,5 @@ COPY ./server/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./server .
+
+LABEL org.opencontainers.image.description MAAPS-Server
