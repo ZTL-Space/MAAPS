@@ -1,3 +1,6 @@
+## BUILD STATUS
+[![Docker Image Publish Matrix](https://github.com/ZTL-Space/MAAPS/actions/workflows/docker-image_matrix.yaml/badge.svg)](https://github.com/ZTL-Space/MAAPS/actions/workflows/docker-image_matrix.yaml)
+ 
 ## MAAPS
 
 MAAPS - Machine Access And Payments System
