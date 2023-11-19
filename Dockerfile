@@ -12,6 +12,10 @@ RUN \
  python3 -m pip install -r requirements.txt --no-cache-dir && \
  apk --purge del .build-deps
 
+RUN apk add libjpeg-turbo
+
 COPY ./server .
 
+CMD [ "python", "manage.py" ]
+EXPOSE 8000/tcp
 LABEL org.opencontainers.image.description "MAAPS-Server"
