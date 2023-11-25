@@ -36,24 +36,20 @@ it uses RFID cards for authentification.
 Add devices to setup/devices.csv, edit setup/wpa_supplicant.conf to match your wlan.
 
 #### Server
+Execute these commands in the maaps-server-1 docker container
 ```
-pip install -r server/requirements.txt
-python3 server/manage.py migrate
+pip install -r requirements.txt
+python3 manage.py migrate
 ```
 
-On first install login to server now, go to /MAAPS/server and run
+On first install login to server now, run
 ```
-python3 manage.py createsuperuser 
+python3 manage.py createsuperuser
 ```
 
 to add your first user. 
 Open the user admin page https://SERVERIP/webif/user/list, add firstname and lastname to admin user and save.
 Open the django admin page at https://SERVERIP/admin/, open the "Tokens" page and get the token identifier for admin (for example U:admin;4c31a8d19b95a7dfe85c)
-
-start server
-```
-python3 manage.py runserver 0.0.0.0:8001 
-```
 
 
 #### Point of Sale
